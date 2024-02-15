@@ -1,18 +1,37 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Order Invoicing Automation
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Overview
 
-## How Do You Plan to Deploy Your Changes?
+This project provides a solution for automating the generation of invoices for orders in Salesforce. It includes Apex classes and a scheduler to generate invoices for activated orders with associated products.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Features
 
-## Configure Your Salesforce DX Project
+- **Automated Invoicing**: Invoices are generated automatically for activated orders.
+- **Batch Processing**: Invoices are generated in batch to handle large volumes of orders efficiently.
+- **Scheduler**: Includes a scheduler to run the batch process daily at midnight.
+- **Error Logging**: Errors during the batch process are logged for debugging and monitoring.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## Components
 
-## Read All About It
+### Apex Classes
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. **ECGenerateInvoiceBatch**: Batch class responsible for generating invoices.
+2. **ECInvoiceGeneratorScheduler**: Schedulable class to schedule the batch process and update scheduler logs.
+3. **EC_ScheduleController**: Apex controller for handling scheduling and stopping the scheduler via Lightning Web Components.
+
+### Custom Objects
+
+1. **Invoice__c**: Custom object to store generated invoices.
+2. **Invoice_Item__c**: Custom object to store invoice line items.
+3. **Scheduler_Log__c**: Custom object to log scheduler run details.
+
+### Lightning Web Components (LWC)
+
+1. **SchedulerControl**: LWC to start and stop the scheduler and display last run details.
+
+## Deployment Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/salesforce-order-invoicing.git
